@@ -1,0 +1,54 @@
+import React from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  Container,
+  Title,
+  Avatar,
+  Info,
+  Name,
+  Email,
+  SingOutButton,
+} from './styles';
+import Layout from '../Layout';
+import {signOut} from '../../store/modules/auth/actions';
+
+export default function Profile() {
+  const student = useSelector(state => state.auth.student);
+
+  console.tron.log(student);
+  const dispach = useDispatch();
+
+  function handleSingOut() {
+    dispach(signOut());
+  }
+
+  return (
+    <Layout>
+      <Container>
+        <Title>Meu Perfil</Title>
+        <Avatar
+          source={{
+            uri: student.avatar
+              ? student.avatar.url
+              : 'https://api.adorable.io/avatars/120/abott@adorable.png',
+          }}
+        />
+
+        <Info>
+          <Name>{student.name}</Name>
+          <Email>{student.email}</Email>
+        </Info>
+
+        <SingOutButton onPress={handleSingOut}>Sair</SingOutButton>
+      </Container>
+    </Layout>
+  );
+}
+
+Profile.navigationOptions = {
+  tabBarLabel: 'Meu Perfil',
+  tabBarIcon: ({tintColor}) => (
+    <Icon name="account-box" size={20} color={tintColor} />
+  ),
+};
