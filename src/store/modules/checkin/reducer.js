@@ -6,7 +6,6 @@ const INITIAL_STATE = {
 };
 
 export default function checkin(state = INITIAL_STATE, action) {
-  console.tron.log('act', action);
   return produce(state, draft => {
     switch (action.type) {
       case '@checkin/LIST_CHECKIN_SUCCESS': {

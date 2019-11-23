@@ -1,19 +1,15 @@
-import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-// import {createStackNavigator} from 'react-navigation-stack';
-
-import {Image} from 'react-native';
-
-// import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import SignIn from '~/pages/SignIn';
 
 import Checkin from '~/pages/Checkin';
-import HelperOrder from '~/pages/HelperOrder';
+import HelpOrderList from '~/pages/HelpOrder/List';
 import Profile from '~/pages/Profile';
 
-import logo from '~/assets/logo.png';
+import Answer from '~/pages/HelpOrder/Answer';
+import Question from '~/pages/HelpOrder/Question';
+
 export default (signedIn = false) =>
   createAppContainer(
     createSwitchNavigator(
@@ -21,10 +17,14 @@ export default (signedIn = false) =>
         Sign: createSwitchNavigator({
           SignIn,
         }),
+        HelpOrder: createSwitchNavigator({
+          Answer,
+          Question,
+        }),
         App: createBottomTabNavigator(
           {
             Checkin,
-            HelperOrder,
+            HelpOrderList,
             Profile,
           },
           {

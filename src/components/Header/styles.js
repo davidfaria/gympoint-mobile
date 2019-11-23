@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {TouchableOpacity} from 'react-native';
 
 export const Container = styled.View`
   flex-direction: row;
@@ -9,4 +10,9 @@ export const Container = styled.View`
   border: 0 solid #ddd;
   border-bottom-width: 1px;
   padding: 0 20px;
+`;
+
+export const GoBack = styled(TouchableOpacity)`
+  position: absolute;
+  left: 20px;
 `;
