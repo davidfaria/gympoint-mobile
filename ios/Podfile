@@ -36,6 +36,10 @@ target 'gympoint' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
+
+  pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
   target 'gympointTests' do
     inherit! :search_paths
     # Pods for testing
