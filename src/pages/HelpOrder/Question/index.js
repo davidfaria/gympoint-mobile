@@ -34,7 +34,7 @@ export default function Question({navigation}) {
       <Container>
         <QuestionInput
           textAlignVertical="top"
-          placeholder="Digite seu pedido de auxílio"
+          placeholder="Inclua seu pedido de auxílio"
           numberOfLines={10}
           multiline={true}
           value={question}
@@ -43,9 +43,11 @@ export default function Question({navigation}) {
           returnKeyType="send"
           onSubmitEditing={handleSubmit}
         />
-        <SubmitButton loading={loading} onPress={handleSubmit}>
-          Enviar Pedido
-        </SubmitButton>
+        <SubmitButton
+          loading={loading}
+          onPress={handleSubmit}
+          label="Enviar pedido"
+        />
       </Container>
     </Layout>
   );

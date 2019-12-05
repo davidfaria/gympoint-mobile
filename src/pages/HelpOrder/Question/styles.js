@@ -14,6 +14,8 @@ export const QuestionInput = styled.TextInput.attrs({
   background-color: #fff;
   border-radius: 4px;
   border: 1px solid #dddddd;
+
+  padding-left: 20px;
 `;
 
 export const SubmitButton = styled(Button)`

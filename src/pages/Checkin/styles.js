@@ -21,6 +21,8 @@ export const CheckinInfo = styled.View`
 
   flex-direction: row;
   justify-content: space-between;
+
+  border: 1px solid #dddddd;
 `;
 export const Label = styled.Text`
   color: #444444;

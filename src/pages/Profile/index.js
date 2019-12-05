@@ -40,7 +40,7 @@ export default function Profile() {
           <Email>{student.email}</Email>
         </Info>
 
-        <SingOutButton onPress={handleSingOut}>Sair</SingOutButton>
+        <SingOutButton onPress={handleSingOut} label="Sair" />
       </Container>
     </Layout>
   );

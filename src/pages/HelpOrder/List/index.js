@@ -43,9 +43,10 @@ export default function HelperOrderList({navigation}) {
     <Layout>
       <Container>
         <HelpOrderButton
-          onPress={() => navigation.navigate('Question', {student})}>
-          Novo pedido de auxílio
-        </HelpOrderButton>
+          onPress={() => navigation.navigate('Question', {student})}
+          label="Novo pedido de auxílio"
+        />
+
         <OrderList
           data={helpOrders}
           keyExtractor={item => String(item.id)}

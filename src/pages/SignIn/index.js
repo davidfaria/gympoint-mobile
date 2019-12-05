@@ -27,9 +27,11 @@ export default function SignIn() {
           value={id}
           onChangeText={setId}
         />
-        <SubmitButton loading={loading} onPress={handleSubmit}>
-          Entrar no sistema
-        </SubmitButton>
+        <SubmitButton
+          loading={loading}
+          onPress={handleSubmit}
+          label="Entrar no sistema"
+        />
       </Form>
     </Container>
   );

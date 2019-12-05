@@ -17,4 +17,10 @@ export const TInput = styled.TextInput.attrs({
   color: #333;
 
   border: 1px solid #dddddd;
+
+  padding-left: 20px;
+
+  /* ::placeholder {
+    padding-left: 20px;
+  } */
 `;

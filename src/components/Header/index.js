@@ -8,7 +8,6 @@ import {Container, GoBack} from './styles';
 import logo from '~/assets/logo-header.png';
 
 const Header = ({navigation, isGoBack, page}) => {
-  // console.tron.log('page', page);
   return (
     <Container>
       {isGoBack ? (
