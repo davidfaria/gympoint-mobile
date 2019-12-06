@@ -16,7 +16,6 @@ import {signOut} from '../../store/modules/auth/actions';
 export default function Profile() {
   const student = useSelector(state => state.auth.student);
 
-  console.tron.log(student);
   const dispach = useDispatch();
 
   function handleSingOut() {
