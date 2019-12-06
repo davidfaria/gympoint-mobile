@@ -38,10 +38,7 @@ export default function Checkin() {
   return (
     <Layout>
       <Container>
-        <CheckinButton
-          onPress={handleNewCheckin}
-          label="Novo check-in (UPDATE)"
-        />
+        <CheckinButton onPress={handleNewCheckin} label="Novo check-in" />
 
         <CheckinList
           data={checkins}
