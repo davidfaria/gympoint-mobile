@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import Button from '../../components/Button';
-import {FlatList} from 'react-native-gesture-handler';
+import {FlatList} from 'react-native';
 
 export const Container = styled.View`
   flex: 1;
