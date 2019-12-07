@@ -1,14 +1,14 @@
-export function listHelpOrderRequest(id) {
+export function listHelpOrderRequest(payload) {
   return {
     type: '@helpOrder/LIST_HELP_ORDER_REQUEST',
-    id,
+    payload,
   };
 }
 
-export function listHelpOrderSucess(helpOrders) {
+export function listHelpOrderSucess({helpOrders, pagination, shouldRefresh}) {
   return {
     type: '@helpOrder/LIST_HELP_ORDER_SUCCESS',
-    payload: {helpOrders},
+    payload: {helpOrders, pagination, shouldRefresh},
   };
 }
 
@@ -29,5 +29,25 @@ export function helpOrderSucess(helpOrder) {
 export function helpOrderFailure() {
   return {
     type: '@helpOrder/HELP_ORDER_FAILURE',
+  };
+}
+
+export function helpOrderAnswerNotification(helpOrderAnswered) {
+  return {
+    type: '@helpOrder/ANSWER_NOTIFICATION',
+    helpOrderAnswered,
+  };
+}
+
+export function updateHelpOrderAnswered(helpOrderAnswered) {
+  return {
+    type: '@helpOrder/UPDATE_HELP_ORDER_ANSWERED',
+    helpOrderAnswered,
+  };
+}
+
+export function helpOrderClear() {
+  return {
+    type: '@helpOrder/HELP_ORDER_CLEAR',
   };
 }

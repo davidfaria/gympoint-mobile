@@ -1,4 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
+import {BASE_URL} from 'react-native-dotenv';
+import sockeio from 'socket.io-client';
+
 import {useDispatch, useSelector} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Layout from '~/pages/Layout/index';
@@ -13,30 +16,69 @@ import {
   Status,
   Time,
   Question,
-  Loading,
 } from './styles';
-import {listHelpOrderRequest} from '~/store/modules/helpOrder/actions';
+import {
+  listHelpOrderRequest,
+  helpOrderAnswerNotification,
+  helpOrderClear,
+} from '~/store/modules/helpOrder/actions';
+import Loading from '~/components/Loading';
 
 export default function HelperOrderList({navigation}) {
   const student = useSelector(state => state.auth.student);
   const helpOrders = useSelector(state => state.helpOrder.helpOrders);
+  const pagination = useSelector(state => state.helpOrder.pagination);
+  const [page, setpPage] = useState(1);
   const loading = useSelector(state => state.helpOrder.loading);
   const dispatch = useDispatch();
 
   const [refreshing, setRefreshing] = useState(false);
 
-  async function loadHelpOrders() {
-    dispatch(listHelpOrderRequest(student.id));
+  const socket = useMemo(
+    () =>
+      sockeio(BASE_URL, {
+        query: {
+          student_id: student.id,
+        },
+      }),
+    [student.id],
+  );
+
+  useEffect(() => {
+    socket.on('ANSWER_NOTIFICATION', helpOrderAnswered => {
+      dispatch(helpOrderAnswerNotification(helpOrderAnswered));
+    });
+  }, [socket]);
+
+  async function loadHelpOrders(pageNumber = page, shouldRefresh = false) {
+    // console.tron.log({page, shouldRefresh, pagination});
+    if (pagination.totalPage && page > pagination.totalPage) return;
+
+    dispatch(
+      listHelpOrderRequest({
+        page,
+        student_id: student.id,
+        shouldRefresh,
+      }),
+    );
+
+    setpPage(pageNumber + 1);
   }
 
   async function reload() {
     setRefreshing(true);
-    await loadHelpOrders();
+    await loadHelpOrders(1, true);
     setRefreshing(false);
   }
 
   useEffect(() => {
     loadHelpOrders();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      dispatch(helpOrderClear());
+    };
   }, []);
 
   return (
@@ -52,6 +94,8 @@ export default function HelperOrderList({navigation}) {
           keyExtractor={item => String(item.id)}
           onRefresh={reload}
           refreshing={refreshing}
+          onEndReached={() => loadHelpOrders()}
+          onEndReachedThreshold={0.2}
           ListFooterComponent={loading && <Loading />}
           renderItem={({item}) => (
             <Order

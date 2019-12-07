@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -18,10 +18,10 @@ import {
 } from '../../store/modules/checkin/actions';
 
 export default function Checkin() {
+  const dispatch = useDispatch();
   const student = useSelector(state => state.auth.student);
   const checkins = useSelector(state => state.checkin.checkins);
-
-  const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
 
   async function loadCheckins() {
     dispatch(listCheckinRequest(student.id));
@@ -35,12 +35,20 @@ export default function Checkin() {
     dispatch(checkinRequest(student.id));
   }
 
+  async function reload() {
+    setRefreshing(true);
+    await loadCheckins();
+    setRefreshing(false);
+  }
+
   return (
     <Layout>
       <Container>
         <CheckinButton onPress={handleNewCheckin} label="Novo check-in" />
 
         <CheckinList
+          onRefresh={reload}
+          refreshing={refreshing}
           data={checkins}
           keyExtractor={item => String(item._id)}
           renderItem={({item, index}) => (

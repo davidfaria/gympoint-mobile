@@ -29,14 +29,10 @@ function* checkin(payload) {
 
     Alert.alert('Sucesso', 'Checkin efetivado com sucesso!');
 
-    // console.tron.log('resu', res);
-
     const data = res.data;
     const dateFormatted = formatRelative(parseISO(data.createdAt), new Date(), {
       locale: pt,
     });
-
-    // console.tron.log('CHECKIN', data, dateFormatted);
 
     yield put(checkinSucess({...data, dateFormatted}));
   } catch (error) {

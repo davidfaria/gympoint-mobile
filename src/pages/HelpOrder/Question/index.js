@@ -23,6 +23,7 @@ export default function Question({navigation}) {
       });
 
       Alert.alert('Sucesso', 'Pedido de auxílio enviado');
+      setQuestion('');
       setLoading(false);
     } catch (err) {
       setLoading(false);
