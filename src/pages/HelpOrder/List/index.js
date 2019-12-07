@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useMemo} from 'react';
-import {RN_BASE_URL} from 'react-native-dotenv';
+import Config from 'react-native-config';
 import sockeio from 'socket.io-client';
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -36,7 +36,7 @@ export default function HelperOrderList({navigation}) {
 
   const socket = useMemo(
     () =>
-      sockeio(RN_BASE_URL, {
+      sockeio(Config.RN_BASE_URL, {
         query: {
           student_id: student.id,
         },
