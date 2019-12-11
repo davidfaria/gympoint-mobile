@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Config from 'react-native-config';
 import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import {StatusBar} from 'react-native';
@@ -15,7 +16,7 @@ import App from './App';
 class Index extends Component {
   constructor(props) {
     super(props);
-    OneSignal.init('ad832852-d20d-4d72-a91c-cb4e253bb082');
+    OneSignal.init(Config.RN_ONE_SIGNAL);
 
     this.onReceived = this.onReceived.bind(this);
     this.onOpened = this.onOpened.bind(this);
