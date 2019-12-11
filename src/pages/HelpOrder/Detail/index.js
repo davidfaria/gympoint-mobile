@@ -14,10 +14,10 @@ import {
   AnswerHeader,
 } from './styles';
 
-export default function Answer({navigation}) {
+export default function Datail({navigation}) {
   const helpOrder = navigation.getParam('helpOrder');
   return (
-    <Layout isGoBack={true} page={'HelpOrderList'}>
+    <Layout isGoBack={true} page={'List'}>
       <Container>
         <Panel>
           <QuestionInfo>
@@ -42,9 +42,9 @@ export default function Answer({navigation}) {
   );
 }
 
-Answer.navigationOptions = {
-  tabBarLabel: 'Check-in',
-  tabBarIcon: ({tintColor}) => (
-    <Icon name="live-help" size={20} color={tintColor} />
-  ),
-};
+// Datail.navigationOptions = {
+//   tabBarLabel: 'Check-in',
+//   tabBarIcon: ({tintColor}) => (
+//     <Icon name="live-help" size={20} color={tintColor} />
+//   ),
+// };

@@ -24,7 +24,7 @@ import {
 } from '~/store/modules/helpOrder/actions';
 import Loading from '~/components/Loading';
 
-export default function HelperOrderList({navigation}) {
+export default function List({navigation}) {
   const student = useSelector(state => state.auth.student);
   const helpOrders = useSelector(state => state.helpOrder.helpOrders);
   const pagination = useSelector(state => state.helpOrder.pagination);
@@ -85,7 +85,7 @@ export default function HelperOrderList({navigation}) {
     <Layout>
       <Container>
         <HelpOrderButton
-          onPress={() => navigation.navigate('Question', {student})}
+          onPress={() => navigation.navigate('New', {student})}
           label="Novo pedido de auxílio"
         />
 
@@ -99,7 +99,7 @@ export default function HelperOrderList({navigation}) {
           ListFooterComponent={loading && <Loading />}
           renderItem={({item}) => (
             <Order
-              onPress={() => navigation.navigate('Answer', {helpOrder: item})}>
+              onPress={() => navigation.navigate('Detail', {helpOrder: item})}>
               <OrderInfo>
                 <StatusInfo>
                   <Icon
@@ -126,9 +126,9 @@ export default function HelperOrderList({navigation}) {
   );
 }
 
-HelperOrderList.navigationOptions = {
+List.navigationOptions = {
   tabBarLabel: 'Pedir ajuda',
-  tabBarIcon: ({tintColor}) => (
-    <Icon name="live-help" size={20} color={tintColor} />
-  ),
+  // tabBarIcon: ({tintColor}) => (
+  //   <Icon name="live-help" size={20} color={tintColor} />
+  // ),
 };

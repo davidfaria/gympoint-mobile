@@ -5,7 +5,7 @@ import Layout from '~/pages/Layout';
 
 import api from '~/services/api';
 
-export default function Question({navigation}) {
+export default function New({navigation}) {
   const student = navigation.getParam('student');
   const questionInputRef = useRef();
   const [question, setQuestion] = useState('');
@@ -31,7 +31,7 @@ export default function Question({navigation}) {
   }
 
   return (
-    <Layout isGoBack={true} page={'HelpOrderList'}>
+    <Layout isGoBack={true} page={'List'}>
       <Container>
         <QuestionInput
           textAlignVertical="top"
