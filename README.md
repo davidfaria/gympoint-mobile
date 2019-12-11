@@ -2,7 +2,7 @@
 <img src="https://raw.githubusercontent.com/davidfaria/gympoint-mobile/master/.github/logo.png">
 </h1>
 <h3 align="center">
-Mobile React Native - GoStack Bootcamp [Rocketseat](https://rocketseat.com.br)
+Mobile React Native - GoStack Bootcamp  <a href="https://rocketseat.com.br" target="__blank">Rocketseat</a>
 </h3>
 
 <p align = "center">
