@@ -32,9 +32,17 @@ class Index extends Component {
     OneSignal.removeEventListener('ids', this.onIds);
   }
 
-  onReceived = data => {};
-  onOpened = notification => {};
-  onIds = id => {};
+  onReceived = data => {
+    //Recebe as informações do push
+  };
+  onOpened = notification => {
+    //Recebe a ação clicada na notificação
+  };
+  onIds = id => {
+    // email -> id
+    //Obs. O user pode ter mais de 1 id, isso permite
+    //ele se conectar em varios celulares
+  };
 
   render() {
     return (
