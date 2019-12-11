@@ -31,25 +31,36 @@
   cp .env.example .env
   ```
 
-- Instalar App Mobile no emulador (ANDROID)
+- ATENÇÃO: Habilitar as comunicação do emulador com (API, reactotron)
+
+  **_Obs. Habite as portas que você está utilizando_**
+
+  ```
+  adb reverse tcp:3333 tcp:3333
+  adb reverse tcp:4444 tcp:4444
+  adb reverse tcp:8081 tcp:8081
+  adb reverse tcp:9090 tcp:9090
+  ```
+
+* Instalar App Mobile no emulador (ANDROID)
 
   ```
   react-native run-android
   ```
 
-- Inicializar App Mobile
+* Inicializar App Mobile
 
   ```
   react-native start
   ```
 
-- Abrir app no emulador
+* Abrir app no emulador
 
   **_Obs. Você precisa realizar o cadastro do aluno
   pelo App Web e entrar com o ID do cadastro, provavelmente
   será o Código 1 por ser o primeiro aluno._**
 
-- Veja como preparar o ambiente nos repositórios:
+* Veja como preparar o ambiente nos repositórios:
 
   BACKEND - https://github.com/davidfaria/gympoint-backend
 
