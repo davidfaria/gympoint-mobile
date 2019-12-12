@@ -52,11 +52,12 @@ export default function List({navigation}) {
 
   async function loadHelpOrders(pageNumber = page, shouldRefresh = false) {
     // console.tron.log({page, shouldRefresh, pagination});
-    if (pagination.totalPage && page > pagination.totalPage) return;
+    if (!shouldRefresh && pagination.totalPage && page > pagination.totalPage)
+      return;
 
     dispatch(
       listHelpOrderRequest({
-        page,
+        page: pageNumber,
         student_id: student.id,
         shouldRefresh,
       }),
@@ -128,7 +129,7 @@ export default function List({navigation}) {
 
 List.navigationOptions = {
   tabBarLabel: 'Pedir ajuda',
-  // tabBarIcon: ({tintColor}) => (
-  //   <Icon name="live-help" size={20} color={tintColor} />
-  // ),
+  tabBarIcon: ({tintColor}) => (
+    <Icon name="live-help" size={20} color={tintColor} />
+  ),
 };

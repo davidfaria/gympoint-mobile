@@ -24,8 +24,8 @@ export default function helpOrder(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
       }
-      case '@helpOrder/HELP_ORDER_SUCCESS': {
-        draft.helpOrders = [...state.helpOrders, action.payload.helpOrder];
+      case '@helpOrder/STORE_HELP_ORDER_SUCCESS': {
+        draft.helpOrders = [action.payload.helpOrder, ...state.helpOrders];
         draft.loading = false;
         break;
       }

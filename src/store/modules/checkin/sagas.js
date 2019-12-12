@@ -5,18 +5,32 @@ import pt from 'date-fns/locale/pt';
 import api from '~/services/api';
 import {checkinSucess, checkinFailure, listCheckinSucess} from './actions';
 
-function* listCheckins(payload) {
+function* listCheckins({payload}) {
   try {
-    const res = yield call(api.get, `/students/${payload.id}/checkins`);
+    const {shouldRefresh} = payload;
 
-    const data = res.data.map(checkin => ({
+    const res = yield call(
+      api.get,
+      `/students/${payload.student_id}/checkins`,
+      {
+        params: {
+          page: payload.page,
+        },
+      },
+    );
+
+    const data = res.data.data.map(checkin => ({
       ...checkin,
       dateFormatted: formatRelative(parseISO(checkin.createdAt), new Date(), {
         locale: pt,
       }),
     }));
 
-    yield put(listCheckinSucess(data));
+    const checkins = data;
+    delete res.data.data;
+    const pagination = res.data;
+
+    yield put(listCheckinSucess({checkins, pagination, shouldRefresh}));
   } catch (error) {
     Alert.alert('Error', 'Erro ao listar os check-ins');
     yield put(checkinFailure());

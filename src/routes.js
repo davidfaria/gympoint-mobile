@@ -24,7 +24,7 @@ export default (signedIn = false) =>
         App: createBottomTabNavigator(
           {
             Checkin,
-            HelpOrder: {
+            ['Pedir Ajuda']: {
               tabBarLabel: 'Pedir ajuda',
               screen: createStackNavigator(
                 {
@@ -50,7 +50,7 @@ export default (signedIn = false) =>
                 ),
               },
             },
-            // Profile,
+            Profile,
           },
           {
             resetOnBlur: true,

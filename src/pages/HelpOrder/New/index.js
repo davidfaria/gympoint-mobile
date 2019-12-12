@@ -1,11 +1,14 @@
 import React, {useRef, useEffect, useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {Alert} from 'react-native';
 import {Container, SubmitButton, QuestionInput} from './styles';
 import Layout from '~/pages/Layout';
 
 import api from '~/services/api';
+import {storeHelpOrderRequest} from '../../../store/modules/helpOrder/actions';
 
 export default function New({navigation}) {
+  const dispatch = useDispatch();
   const student = navigation.getParam('student');
   const questionInputRef = useRef();
   const [question, setQuestion] = useState('');
@@ -16,18 +19,15 @@ export default function New({navigation}) {
   }, []);
 
   async function handleSubmit() {
-    try {
-      setLoading(true);
-      await api.post(`/students/${student.id}/help-orders`, {
+    setLoading(true);
+    dispatch(
+      storeHelpOrderRequest({
+        student_id: student.id,
         question,
-      });
-
-      Alert.alert('Sucesso', 'Pedido de auxílio enviado');
-      setQuestion('');
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-    }
+      }),
+    );
+    setQuestion('');
+    setLoading(false);
   }
 
   return (

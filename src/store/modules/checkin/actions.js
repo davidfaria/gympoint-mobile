@@ -1,14 +1,20 @@
-export function listCheckinRequest(id) {
+export function checkinsClear() {
   return {
-    type: '@checkin/LIST_CHECKIN_REQUEST',
-    id,
+    type: '@checkin/CHECKIN_CLEAR',
   };
 }
 
-export function listCheckinSucess(checkins) {
+export function listCheckinRequest(payload) {
+  return {
+    type: '@checkin/LIST_CHECKIN_REQUEST',
+    payload,
+  };
+}
+
+export function listCheckinSucess({checkins, pagination, shouldRefresh}) {
   return {
     type: '@checkin/LIST_CHECKIN_SUCCESS',
-    payload: {checkins},
+    payload: {checkins, pagination, shouldRefresh},
   };
 }
 

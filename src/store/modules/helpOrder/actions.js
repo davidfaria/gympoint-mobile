@@ -12,30 +12,17 @@ export function listHelpOrderSucess({helpOrders, pagination, shouldRefresh}) {
   };
 }
 
-export function helpOrderRequest(id) {
+export function storeHelpOrderRequest(payload) {
   return {
-    type: '@helpOrder/HELP_ORDER_REQUEST',
-    id,
+    type: '@helpOrder/STORE_HELP_ORDER_REQUEST',
+    payload,
   };
 }
 
-export function helpOrderSucess(helpOrder) {
+export function storeHelpOrderSucess(helpOrder) {
   return {
-    type: '@helpOrder/HELP_ORDER_SUCCESS',
+    type: '@helpOrder/STORE_HELP_ORDER_SUCCESS',
     payload: {helpOrder},
-  };
-}
-
-export function helpOrderFailure() {
-  return {
-    type: '@helpOrder/HELP_ORDER_FAILURE',
-  };
-}
-
-export function helpOrderAnswerNotification(helpOrderAnswered) {
-  return {
-    type: '@helpOrder/ANSWER_NOTIFICATION',
-    helpOrderAnswered,
   };
 }
 
@@ -46,8 +33,21 @@ export function updateHelpOrderAnswered(helpOrderAnswered) {
   };
 }
 
+export function helpOrderAnswerNotification(helpOrderAnswered) {
+  return {
+    type: '@helpOrder/ANSWER_NOTIFICATION',
+    helpOrderAnswered,
+  };
+}
+
 export function helpOrderClear() {
   return {
     type: '@helpOrder/HELP_ORDER_CLEAR',
+  };
+}
+
+export function helpOrderFailure() {
+  return {
+    type: '@helpOrder/HELP_ORDER_FAILURE',
   };
 }

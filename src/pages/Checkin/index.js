@@ -12,24 +12,35 @@ import {
   Label,
   Time,
 } from './styles';
+import Loading from '~/components/Loading';
 import {
   listCheckinRequest,
   checkinRequest,
+  checkinsClear
 } from '../../store/modules/checkin/actions';
 
 export default function Checkin() {
   const dispatch = useDispatch();
   const student = useSelector(state => state.auth.student);
   const checkins = useSelector(state => state.checkin.checkins);
+  const pagination = useSelector(state => state.checkin.pagination);
+  const [page, setpPage] = useState(1);
+  const loading = useSelector(state => state.checkin.loading);
   const [refreshing, setRefreshing] = useState(false);
 
-  async function loadCheckins() {
-    dispatch(listCheckinRequest(student.id));
-  }
+  async function loadCheckins(pageNumber = page, shouldRefresh = false) {
+    if (!shouldRefresh && pagination.totalPage && page > pagination.totalPage)
+      return;
 
-  useEffect(() => {
-    loadCheckins();
-  }, []);
+    dispatch(
+      listCheckinRequest({
+        page: pageNumber,
+        student_id: student.id,
+        shouldRefresh,
+      }),
+    );
+    setpPage(pageNumber + 1);
+  }
 
   function handleNewCheckin() {
     dispatch(checkinRequest(student.id));
@@ -37,9 +48,19 @@ export default function Checkin() {
 
   async function reload() {
     setRefreshing(true);
-    await loadCheckins();
+    await loadCheckins(1, true);
     setRefreshing(false);
   }
+
+  useEffect(() => {
+    loadCheckins();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      dispatch(checkinsClear());
+    };
+  }, []);
 
   return (
     <Layout>
@@ -47,13 +68,16 @@ export default function Checkin() {
         <CheckinButton onPress={handleNewCheckin} label="Novo check-in" />
 
         <CheckinList
-          onRefresh={reload}
-          refreshing={refreshing}
           data={checkins}
           keyExtractor={item => String(item._id)}
-          renderItem={({item, index}) => (
+          onRefresh={reload}
+          refreshing={refreshing}
+          onEndReached={() => loadCheckins()}
+          onEndReachedThreshold={0.2}
+          ListFooterComponent={loading && <Loading />}
+          renderItem={({item}) => (
             <CheckinInfo>
-              <Label>Check #{index + 1}</Label>
+              <Label>{item.label}</Label>
               <Time>{item.dateFormatted}</Time>
             </CheckinInfo>
           )}
